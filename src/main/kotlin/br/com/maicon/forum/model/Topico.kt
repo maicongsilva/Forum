@@ -8,7 +8,8 @@ data class Topico(
     val mensagem: String,
     val dataCriacao: LocalDateTime = LocalDateTime.now(),
     val curso: Curso,
-    val 
+    val autor: Usuario,
+    val status: StatusTopico = StatusTopico.NAO_RESPONDIDO
 )
 
 
