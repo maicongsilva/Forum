@@ -50,7 +50,7 @@ class RespostaService(private var respostas: List<Resposta>) {
     }
 
     fun listar(idTopico: Long): List<Resposta> {
-        return respostas.stream().filter { r ->
+        return respostas.stream().filter{ r ->
             r.topico.id == idTopico
         }.collect(Collectors.toList())
     }
