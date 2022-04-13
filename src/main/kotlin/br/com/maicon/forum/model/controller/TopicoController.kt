@@ -1,4 +1,4 @@
-package br.com.maicon.forum.controller
+package br.com.maicon.forum.model.controller
 
 import br.com.maicon.forum.dto.NovoTopicoDto
 import br.com.maicon.forum.dto.NovoTopicoForm

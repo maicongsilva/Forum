@@ -1,4 +1,4 @@
-package br.com.maicon.forum.controller
+package br.com.maicon.forum.model.controller
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
