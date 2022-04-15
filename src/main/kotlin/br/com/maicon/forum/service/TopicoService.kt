@@ -1,5 +1,6 @@
 package br.com.maicon.forum.service
 
+import br.com.maicon.forum.dto.AtualizacaoTopicoForm
 import br.com.maicon.forum.dto.NovoTopicoDto
 import br.com.maicon.forum.dto.NovoTopicoForm
 import br.com.maicon.forum.dto.TopicoView
@@ -32,10 +33,33 @@ class TopicoService(
         return topicoViewMapper.map(topico)
     }
 
+    fun buscarTopicoPorId(id: Long): Topico{
+        val topico = topicos.stream().filter({
+                t -> t.id == id
+        }).findFirst().get()
+        return topico
+    }
+
     fun cadastrar(form: NovoTopicoForm){
        val topico = topicoFormMapper.map(form)
         topico.id = topicos.size.toLong() + 1
         topicos =  topicos.plus(topico)
+    }
+
+    fun atualizar(form: AtualizacaoTopicoForm) {
+        val topico = topicos.stream().filter({
+                t -> t.id == form.id
+        }).findFirst().get()
+        topicos = topicos.minus(topico).plus(Topico(
+            id = form.id,
+            titulo = form.titulo,
+            mensagem = form.mensagem,
+            autor = topico.autor,
+            curso = topico.curso,
+            status = topico.status,
+            dataCriacao = topico.dataCriacao,
+            respostas = topico.respostas
+        ))
     }
 
 

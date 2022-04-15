@@ -1,5 +1,7 @@
 package br.com.maicon.forum.service
 
+import br.com.maicon.forum.dto.NovaRespostaForm
+import br.com.maicon.forum.mapper.RespostasFormMapper
 import br.com.maicon.forum.model.Curso
 import br.com.maicon.forum.model.Resposta
 import br.com.maicon.forum.model.Topico
@@ -9,7 +11,11 @@ import java.util.*
 import java.util.stream.Collectors
 
 @Service
-class RespostaService(private var respostas: List<Resposta>) {
+class RespostaService(
+    private var respostas: List<Resposta>,
+    private val respostasFormMapper: RespostasFormMapper,
+    private val topicoService: TopicoService
+    ) {
 
     init{
         val curso = Curso(
@@ -30,7 +36,7 @@ class RespostaService(private var respostas: List<Resposta>) {
             autor = autor
         )
 
-        val resposta = Resposta(
+        val resposta1 = Resposta(
             id = 1,
             mensagem = "Resposta 1",
             autor = autor,
@@ -46,12 +52,18 @@ class RespostaService(private var respostas: List<Resposta>) {
             solucao = false
         )
 
-        respostas = Arrays.asList(resposta, resposta2)
+        respostas = Arrays.asList(resposta1, resposta2)
     }
 
     fun listar(idTopico: Long): List<Resposta> {
         return respostas.stream().filter{ r ->
             r.topico.id == idTopico
         }.collect(Collectors.toList())
+    }
+
+    fun cadastrar(form: NovaRespostaForm) {
+          val resposta = respostasFormMapper.map(form)
+              resposta.id = respostas.size.toLong()+1
+              respostas = respostas.plus(resposta)
     }
 }
