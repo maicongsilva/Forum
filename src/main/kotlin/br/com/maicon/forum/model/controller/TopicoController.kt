@@ -1,10 +1,8 @@
 package br.com.maicon.forum.model.controller
 
 import br.com.maicon.forum.dto.AtualizacaoTopicoForm
-import br.com.maicon.forum.dto.NovoTopicoDto
 import br.com.maicon.forum.dto.NovoTopicoForm
 import br.com.maicon.forum.dto.TopicoView
-import br.com.maicon.forum.model.Topico
 import br.com.maicon.forum.service.TopicoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -54,6 +52,6 @@ class TopicoController(private val service: TopicoService) {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deletar(@PathVariable id: Long){
-        service.deletar(id)
+        service.deletar(id,)
     }
 }
